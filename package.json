@@ -1,0 +1,22 @@
+{
+  "name": "css-utility",
+  "version": "1.0.0",
+  "description": "The official app for VK Media's CSS Utility tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VK-Media/CSS-Utility.git"
+  },
+  "author": "VK Media",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VK-Media/CSS-Utility/issues"
+  },
+  "homepage": "https://github.com/VK-Media/CSS-Utility#readme",
+  "dependencies": {
+    "node-sass": "^4.12.0"
+  }
+}
