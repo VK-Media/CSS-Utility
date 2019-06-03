@@ -1,5 +1,5 @@
-const sass = require('node-sass')
-const fs = require('fs')
+import * as sass from 'node-sass';
+import * as fs from 'fs';
 
 sass.render({ 
     file: './app/test.scss',
