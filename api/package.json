@@ -6,16 +6,6 @@
   "scripts": {
     "dev": "ts-node ./index.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VK-Media/CSS-Utility.git"
-  },
-  "author": "VK Media",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/VK-Media/CSS-Utility/issues"
-  },
-  "homepage": "https://github.com/VK-Media/CSS-Utility#readme",
   "dependencies": {
     "node-sass": "^4.12.0"
   },
