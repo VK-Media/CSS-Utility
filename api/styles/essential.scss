@@ -6,28 +6,3 @@ $breakpoints: (
 );
 
 $spacer: 10px;
-
-$display: (
-	'b': block,
-	'ib': inline-block,
-	'f': flex,
-	'n': none,
-	'i': initial,
-	'g': grid
-);
-
-@each $key, $value in $display {
-	.d-#{$key} {
-		display: $value;
-	}
-}
-
-@each $identifier, $breakpoint in $breakpoints {
-    @media (min-width: $breakpoint) {
-        @each $key, $value in $display {
-            .d-#{$identifier}-#{$key} {
-                display: $value;
-            }
-        }
-    }
-}
