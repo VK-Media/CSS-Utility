@@ -1,12 +1,16 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 
+import { StyleRoutes } from "./routes";
+
 class App {
     public app: express.Application;
+    public styleRoutes: StyleRoutes = new StyleRoutes();
 
     constructor() {
         this.app = express();
         this.config();
+        this.styleRoutes.routes(this.app);
     }
 
     private config(): void {
