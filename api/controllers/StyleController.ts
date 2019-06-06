@@ -8,12 +8,13 @@ import Files from '../utility/Files';
 export class StyleController {
     protected rootFolder: string = '/styles/';
 
+    // Should be more complex to take into account if some of the modules have dependencies
     protected fileMap: { [key: string]: string; } = {
         styles: 'styles',
         essential: 'essential',
         display: 'display/display',
         displayEssential: 'display/essential',
-        displayFlex: 'stylesdisplay/flex/flex',
+        displayFlex: 'display/flex/flex',
         distribution: 'distribution/distribution',
         distributionOffset: 'distribution/offset/offset',
         distributionWidth: 'distribution/width/width',
@@ -28,9 +29,10 @@ export class StyleController {
     public requestCss = (req: Request, res: Response) => {
         const requestData = req.body;
         const entries = Object.entries(requestData);
-
+        let includedModules: string[] = [];
         let scssToRender: string = `@import '..${this.rootFolder}${this.fileMap.essential}.scss';`;
 
+        // Should check if parent or child is already included, to make sure of not getting double styles
         for (const [module, include] of entries) {
             if(include == 1 && this.fileMap.hasOwnProperty(module)){
                 let fileToInclude: string;
@@ -39,44 +41,52 @@ export class StyleController {
                     fileToInclude = `..${this.rootFolder}${this.fileMap[module]}.scss`;
 
                     scssToRender += `@import '${fileToInclude}';`;
+                    includedModules.push(module);
                 }
             }
         }
 
-        res.send({ scssToRender });
+        includedModules.sort();
+        const namespace: string = md5(includedModules.join('-'));
+        const tempScssFile: string = `${__dirname}/../temp/${namespace}.scss`;
+        const cssOutput: string = `${__dirname}/../output/${namespace}.css`;
 
-        /*
-        const outputDirectory: string = './output';
-
-        if (!Files.directoryExists(outputDirectory)) {
-            Files.createDirectory(outputDirectory);
+        if(Files.isFile(cssOutput)){
+            console.log('File already exists!');
+            return res.send({ success: true });
+        } else {
+            fs.writeFile(tempScssFile, scssToRender, (err) => {
+                if(err){
+                    console.log(err);
+                    return res.send({ success: false });
+                } else {
+                    this.renderScss(tempScssFile, cssOutput, err => {
+                        if(err){
+                            console.log(err);
+                            return res.send({ success: false });
+                        } else {
+                            // When CSS file has been created, remove the temp SCSS file
+                            return res.send({ success: true });
+                        }
+                    });
+                }
+            });
         }
-
-        const success: boolean = this.renderScss('./styles/styles.scss', './output/styles.css');
-
-        res.send({ success });
-       */
     }
 
-    protected renderScss(input: string, output: string): boolean {
+    protected renderScss(input: string, output: string, callback: Function): void {
         sass.render({
             file: input,
             outputStyle: 'compressed'
         }, (err, result) => {
-            if (err) {
+            if(err){
                 console.log(err);
-                return false;
+            } else {
+                fs.writeFile(output, result.css, err => {
+                    callback(err);
+                });
             }
-
-            fs.writeFile(output, result.css, err => {
-                if (err) {
-                    console.log(err);
-                    return false;
-                }
-            });
         });
-
-        return true;
     }
 
     protected createScssFile() {

@@ -28,4 +28,5 @@ build/Release
 node_modules
 
 # Output files
-api/output
+output
+temp
