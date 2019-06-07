@@ -12,26 +12,54 @@ export class StyleController {
         const entries = Object.entries(requestData);
         const rootFolder = StyleData.getRootFolder();
         const essentialModule = StyleData.getModule('essential');
-        let includedModules: string[] = [];
+        let requestedModules: Array<string> = [];
+        let modulesToRender: Array<string> = [];
         let scssToRender: string = `@import '..${rootFolder}${essentialModule.path}.scss';`;
 
-        // Should check if parent or child is already included, to make sure of not getting double styles
+        // Create array containing valid requested modules
         for (const [moduleName, include] of entries) {
             if(include == 1){
-                let fileToInclude: string;
                 const module = StyleData.getModule(moduleName);
 
-                if(Files.isFile(`${__dirname}/..${rootFolder}${module.path}.scss`)){
-                    fileToInclude = `..${rootFolder}${module.path}.scss`;
-
-                    scssToRender += `@import '${fileToInclude}';`;
-                    includedModules.push(moduleName);
+                if(module){
+                    if(Files.isFile(`${__dirname}/..${rootFolder}${module.path}.scss`)){
+                        requestedModules.push(moduleName);
+                    }
                 }
             }
         }
 
-        includedModules.sort();
-        const namespace: string = md5(includedModules.join('-'));
+        // Make sure to only include module if none of it's potential parents are included.
+        requestedModules.forEach(requestedModule => {
+            const module = StyleData.getModule(requestedModule);
+
+            if(module){
+                const moduleHasParents = module.hasOwnProperty('parents');
+                let includeModule = true;
+
+                if(moduleHasParents){
+                    module.parents.forEach(parent => {
+                        if(requestedModules.indexOf(parent) !== -1) {
+                            includeModule = false;
+                        }
+                    });
+                }
+
+                if(includeModule){
+                    const fileToInclude = `..${rootFolder}${module.path}.scss`;
+                    
+                    scssToRender += `@import '${fileToInclude}';`;
+                    modulesToRender.push(requestedModule);
+                } else {
+                    console.log(`${requestedModule} is already included.`);
+                }
+            }
+        });
+
+        // TODO: Include module dependencies
+
+        modulesToRender.sort();
+        const namespace: string = md5(modulesToRender.join('-'));
         const tempScssFile: string = `${__dirname}/../temp/${namespace}.scss`;
         const cssOutput: string = `${__dirname}/../output/${namespace}.css`;
 

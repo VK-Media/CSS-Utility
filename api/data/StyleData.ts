@@ -1,4 +1,4 @@
-interface Module { path: string; dependencies?: Array<string> }
+interface Module { path: string; dependencies?: Array<string>, parents?: Array<string> }
 interface ModuleMap { [s: string]: Module; }
 
 export default class StyleData {
@@ -7,49 +7,59 @@ export default class StyleData {
     // This should definitely be saved in a database instead...
     protected static moduleMap: ModuleMap = {
         styles: {
-            path: 'styles',
-            dependencies: ['essential']
+            path: 'styles'
         },
         essential: {
             path: 'essential'
         },
         display: {
             path: 'display/display',
-            dependencies: ['displayEssential']
+            dependencies: ['displayEssential'],
+            parents: ['styles']
         },
         displayEssential: {
             path: 'display/essential'
         },
         displayFlex: {
             path: 'display/flex/flex', 
-            dependencies: ['displayEssential']
+            dependencies: ['displayEssential'],
+            parents: ['styles', 'display']
         },
         distribution: {
-            path: 'distribution/distribution'
+            path: 'distribution/distribution',
+            parents: ['styles']
         },
         distributionOffset: {
-            path: 'distribution/offset/offset'
+            path: 'distribution/offset/offset',
+            parents: ['styles', 'distribution']
         },
         distributionWidth: {
-            path: 'distribution/width/width'
+            path: 'distribution/width/width',
+            parents: ['styles', 'distribution']
         },
         spacing: {
-            path: 'spacing/spacing'
+            path: 'spacing/spacing',
+            parents: ['styles']
         },
         spacingMargin: {
-            path: 'spacing/margin/margin'
+            path: 'spacing/margin/margin',
+            parents: ['styles', 'spacing']
         },
         spacingPadding: {
-            path: 'spacing/padding/padding'
+            path: 'spacing/padding/padding',
+            parents: ['styles', 'spacing']
         },
         text: {
-            path: 'text/text'
+            path: 'text/text',
+            parents: ['styles']
         },
         textAlign: {
-            path: 'text/align/align'
+            path: 'text/align/align',
+            parents: ['styles', 'text']
         },
         textSize: {
-            path: 'text/size/size'
+            path: 'text/size/size',
+            parents: ['styles', 'text']
         }
     }
 
