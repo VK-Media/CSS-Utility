@@ -7,14 +7,15 @@ export default class StyleData {
     // This should definitely be saved in a database instead...
     protected static moduleMap: ModuleMap = {
         styles: {
-            path: 'styles'
+            path: 'styles',
+            dependencies: ['essential']
         },
         essential: {
             path: 'essential'
         },
         display: {
             path: 'display/display',
-            dependencies: ['displayEssential'],
+            dependencies: ['essential', 'displayEssential'],
             parents: ['styles']
         },
         displayEssential: {
@@ -22,44 +23,53 @@ export default class StyleData {
         },
         displayFlex: {
             path: 'display/flex/flex', 
-            dependencies: ['displayEssential'],
+            dependencies: ['essential', 'displayEssential'],
             parents: ['styles', 'display']
         },
         distribution: {
             path: 'distribution/distribution',
-            parents: ['styles']
+            parents: ['styles'],
+            dependencies: ['essential']
         },
         distributionOffset: {
             path: 'distribution/offset/offset',
-            parents: ['styles', 'distribution']
+            parents: ['styles', 'distribution'],
+            dependencies: ['essential']
         },
         distributionWidth: {
             path: 'distribution/width/width',
-            parents: ['styles', 'distribution']
+            parents: ['styles', 'distribution'],
+            dependencies: ['essential']
         },
         spacing: {
             path: 'spacing/spacing',
-            parents: ['styles']
+            parents: ['styles'],
+            dependencies: ['essential']
         },
         spacingMargin: {
             path: 'spacing/margin/margin',
-            parents: ['styles', 'spacing']
+            parents: ['styles', 'spacing'],
+            dependencies: ['essential']
         },
         spacingPadding: {
             path: 'spacing/padding/padding',
-            parents: ['styles', 'spacing']
+            parents: ['styles', 'spacing'],
+            dependencies: ['essential']
         },
         text: {
             path: 'text/text',
-            parents: ['styles']
+            parents: ['styles'],
+            dependencies: ['essential']
         },
         textAlign: {
             path: 'text/align/align',
-            parents: ['styles', 'text']
+            parents: ['styles', 'text'],
+            dependencies: ['essential']
         },
         textSize: {
             path: 'text/size/size',
-            parents: ['styles', 'text']
+            parents: ['styles', 'text'],
+            dependencies: ['essential']
         }
     }
 

@@ -12,9 +12,11 @@ export class StyleController {
         const entries = Object.entries(requestData);
         const rootFolder = StyleData.getRootFolder();
         const essentialModule = StyleData.getModule('essential');
+        
         let requestedModules: Array<string> = [];
         let modulesToRender: Array<string> = [];
-        let scssToRender: string = `@import '..${rootFolder}${essentialModule.path}.scss';`;
+        let dependenciesToAdd: Array<string> = [];
+        let scssToRender: string = '';
 
         // Create array containing valid requested modules
         for (const [moduleName, include] of entries) {
@@ -50,13 +52,31 @@ export class StyleController {
                     
                     scssToRender += `@import '${fileToInclude}';`;
                     modulesToRender.push(requestedModule);
-                } else {
-                    console.log(`${requestedModule} is already included.`);
+                }
+
+                if(module.hasOwnProperty('dependencies')){
+                    const dependencies: Array<string> = module.dependencies;
+
+                    dependencies.forEach((dependency: string) => {
+                        if (dependenciesToAdd.indexOf(dependency) == -1) {
+                            dependenciesToAdd.push(dependency);
+                        }
+                    });
                 }
             }
         });
 
-        // TODO: Include module dependencies
+        // Create dependency list
+        let dependenciesScss: string = '';
+
+        dependenciesToAdd.forEach((dependencyToAdd: string) => {
+            const module = StyleData.getModule(dependencyToAdd);
+            const fileToInclude = `..${rootFolder}${module.path}.scss`;
+            dependenciesScss += `@import '${fileToInclude}';${scssToRender}`;
+        });
+
+        // Prepend dependencies
+        scssToRender = dependenciesScss + scssToRender;
 
         modulesToRender.sort();
         const namespace: string = md5(modulesToRender.join('-'));
