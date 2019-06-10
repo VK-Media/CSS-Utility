@@ -5,6 +5,6 @@ export default class StyleRoutes {
 
     public routes(app): void {
         app.route('/css')
-            .post(this.styleController.requestCss)
+            .get(this.styleController.requestCss)
     }
 }

@@ -8,13 +8,19 @@ type Effect = ThunkAction<any, ApplicationState, any, ApplicationAction>;
 
 export const requestCss = (): Effect => (dispatch, getState) => {
     const selectedModules = getState().selectedModules;
-    let data: { [s: string]: number } = {};
+    let url: string = 'http://localhost:5002/css?';
 
     selectedModules.forEach(selectedModule => {
-        data[selectedModule] = 1;
+        url += `${selectedModule}=1&`;
     });
 
-    styleApi.post('/css', data)
+    url = url.substring(0, url.length - 1);
+
+    window.open(url);
+    dispatch(resetSelectedModules());
+
+    /*
+    styleApi.get(url)
         .then(response => {
             console.log(response);
             dispatch(resetSelectedModules());
@@ -22,4 +28,5 @@ export const requestCss = (): Effect => (dispatch, getState) => {
         .catch(e => {
             console.log(e);
         });
+        */
 };

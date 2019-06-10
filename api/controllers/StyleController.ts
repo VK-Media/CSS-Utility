@@ -8,7 +8,7 @@ import StyleData from '../data/StyleData';
 
 export class StyleController {
     public requestCss = (req: Request, res: Response) => {
-        const requestData = req.body;
+        const requestData = req.query;
         const entries = Object.entries(requestData);
         const rootFolder = StyleData.getRootFolder();
         const essentialModule = StyleData.getModule('essential');
@@ -20,7 +20,7 @@ export class StyleController {
 
         // Create array containing valid requested modules
         for (const [moduleName, include] of entries) {
-            if(include == 1){
+            if(include === '1'){
                 const module = StyleData.getModule(moduleName);
 
                 if(module){
@@ -87,8 +87,7 @@ export class StyleController {
         this.createRequiredFolders();
 
         if(Files.isFile(cssOutput)){
-            console.log('File already exists!');
-            return res.send({ success: true });
+            return res.download(cssOutput, 'styles.css');
         } else {
             fs.writeFile(tempScssFile, scssToRender, (err) => {
                 if(err){
@@ -106,7 +105,9 @@ export class StyleController {
                                     console.log(err);
                                     return res.send({ success: false });
                                 } else {
-                                    return res.send({ success: true });
+                                    return res.download(cssOutput, 'styles.css', err => {
+                                        if(err) console.log(err);
+                                    });
                                 }
                             });
                         }
