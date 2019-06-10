@@ -1,29 +1,26 @@
 
 import { Action } from 'redux';
 
-export interface LoadingState {
-    users: boolean;
+export interface Module {
+    name: string;
 }
 
 export interface ApplicationState {
-    loading: LoadingState;
-    users: User[];
+    selectedModules: Array<string>;
 }
 
-export interface LoadUsersRequest extends Action {
-    type: 'loadUsersRequest';
+export interface AddModule extends Action {
+    type: 'addModule';
+    module: Module
 }
 
-export interface LoadUsersSuccess extends Action {
-    type: 'loadUsersSuccess';
-    users: User[];
+export interface RequestCss extends Action {
+    type: 'requestCss';
 }
 
-export interface LoadUsersError extends Action {
-    type: 'loadUsersError';
+export interface ResetSelectedModules extends Action {
+    type: 'resetSelectedModules';
 }
 
 export type ApplicationAction =
-    | LoadUsersRequest
-    | LoadUsersSuccess
-    | LoadUsersError;
+    | AddModule;

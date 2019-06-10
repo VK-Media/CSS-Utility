@@ -1,0 +1,36 @@
+@import '../../styles/variables';
+
+.status-bar {
+    position: fixed;
+    width: calc(100vw - #{$navigation-width});
+    background-color: $light-grey;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+
+    .button {
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: $status-bar-button-height;
+        padding: 0 40px;
+        opacity: .85;
+        transition: opacity .25s;
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+        }
+    }
+
+    .download-css {
+        background-color: $green;
+    }
+
+    .reset-modules {
+        background-color: $red;
+    }
+}

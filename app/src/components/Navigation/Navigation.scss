@@ -1,0 +1,9 @@
+@import '../../styles/variables';
+
+.navigation {
+    position: fixed;
+    display: flex;
+    width: $navigation-width;
+    height: 100vh;
+    background-color: $dark-grey;
+}
