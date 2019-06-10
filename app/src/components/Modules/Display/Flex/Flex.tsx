@@ -2,23 +2,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { addModule } from '../../../../store/actions';
-import { Module, AddModule } from '../../../../store/types';
+import { Module, AddModule, ApplicationState } from '../../../../store/types';
 
 import './Flex.scss';
 
 type Props = {
+    selectedModules: Array<string>;
     addModule: (module: Module) => AddModule;
 }
 
 const Flex: React.FC<Props> = props => {
-    const addModule = (name: string) => {
-        props.addModule({ name: name });
+    const renderIncludeButton = () => {
+        let className: Array<string> = ['include-button', 'd-f', 'jc-sb', 'ai-c'];
+
+        if(props.selectedModules.indexOf('displayFlex') !== -1){
+            className.push('active');
+        }
+
+        return <div onClick={() => props.addModule({name: 'displayFlex'})} className={className.join(' ')}>Include</div>
     }
+
     return (
         <div className="module">
             <div className="heading d-f jc-sb">
                 <h1>Display/Flex <span>(.d-f)</span></h1>
-                <div onClick={() => addModule('displayFlex')} className="include-button d-f jc-sb ai-c">Include</div>
+                {renderIncludeButton() }
             </div>
 
             <div className="classes">
@@ -98,4 +106,10 @@ const Flex: React.FC<Props> = props => {
     );
 }
 
-export default connect(null, { addModule })(Flex);
+const mapStateToProps = (state: ApplicationState) => {
+    return {
+        selectedModules: state.selectedModules
+    }
+}
+
+export default connect(mapStateToProps, { addModule })(Flex);

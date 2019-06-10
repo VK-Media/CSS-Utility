@@ -2,7 +2,6 @@ import { ThunkAction } from 'redux-thunk';
 import { ApplicationState, ApplicationAction } from './types';
 
 import { resetSelectedModules } from './actions';
-import styleApi from '../apis/styleApi';
 
 type Effect = ThunkAction<any, ApplicationState, any, ApplicationAction>;
 
@@ -18,15 +17,4 @@ export const requestCss = (): Effect => (dispatch, getState) => {
 
     window.open(url);
     dispatch(resetSelectedModules());
-
-    /*
-    styleApi.get(url)
-        .then(response => {
-            console.log(response);
-            dispatch(resetSelectedModules());
-        })
-        .catch(e => {
-            console.log(e);
-        });
-        */
 };
