@@ -6,13 +6,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import App from './components/App';
-import reducers from './store/reducer';
+import reducer, { initialState } from './store/reducer';
 
 import * as serviceWorker from './serviceWorker';
 
 import './index.scss';
 
-const store = createStore(reducers, composeWithDevTools(
+const store = createStore(reducer, initialState, composeWithDevTools(
     applyMiddleware(thunk)
 ));
 

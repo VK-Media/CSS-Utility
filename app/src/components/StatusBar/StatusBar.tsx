@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { requestCss, resetSelectedModules } from '../../store/actions';
+import { resetSelectedModules } from '../../store/actions';
+import { requestCss } from '../../store/effects';
 import { ApplicationState } from '../../store/types';
 
 import './StatusBar.scss';

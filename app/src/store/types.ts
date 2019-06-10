@@ -14,15 +14,10 @@ export interface AddModule extends Action {
     module: Module
 }
 
-export interface RequestCss extends Action {
-    type: 'requestCss';
-}
-
 export interface ResetSelectedModules extends Action {
     type: 'resetSelectedModules';
 }
 
 export type ApplicationAction =
     | AddModule
-    | RequestCss
     | ResetSelectedModules;
