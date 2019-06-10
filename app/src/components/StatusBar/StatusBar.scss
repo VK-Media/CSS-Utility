@@ -6,14 +6,17 @@
     background-color: $light-grey;
     bottom: 0;
     right: 0;
-    display: flex;
-    justify-content: flex-end;
+
+    .module-count {
+        padding: 0 $spacer;
+
+        span {
+            font-weight: 700;
+        }
+    }
 
     .button {
         color: white;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         height: $status-bar-button-height;
         padding: 0 40px;
         opacity: .85;

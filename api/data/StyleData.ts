@@ -8,7 +8,7 @@ export default class StyleData {
     protected static moduleMap: ModuleMap = {
         styles: {
             path: 'styles',
-            dependencies: ['essential']
+            dependencies: ['essential', 'displayEssential']
         },
         essential: {
             path: 'essential'
@@ -22,7 +22,7 @@ export default class StyleData {
             path: 'display/essential'
         },
         displayFlex: {
-            path: 'display/flex/flex', 
+            path: 'display/flex/flex',
             dependencies: ['essential', 'displayEssential'],
             parents: ['styles', 'display']
         },
@@ -86,7 +86,7 @@ export default class StyleData {
     public static addModule = (moduleName: string, module: Module): boolean => {
         const moduleExists = StyleData.moduleMap.hasOwnProperty(moduleName);
 
-        if(!moduleExists){
+        if (!moduleExists) {
             StyleData.moduleMap[moduleName] = module;
             return true;
         }

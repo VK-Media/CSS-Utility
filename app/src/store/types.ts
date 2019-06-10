@@ -23,4 +23,6 @@ export interface ResetSelectedModules extends Action {
 }
 
 export type ApplicationAction =
-    | AddModule;
+    | AddModule
+    | RequestCss
+    | ResetSelectedModules;

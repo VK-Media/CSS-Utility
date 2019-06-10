@@ -2,9 +2,43 @@
 
 .modules {
     position: fixed;
-    overflow: auto;
     top: 0;
     right: 0;
     width: calc(100vw - #{$navigation-width});
     height: calc(100vh - #{$status-bar-button-height});
+    
+    .heading {
+        top: 0;
+        width: calc(100vw - #{$navigation-width});
+        position: fixed;
+        border-bottom: 1px solid $dark-grey;
+
+        h1 {
+            padding: $spacer;
+        }
+
+        .include-button {
+            color: white;
+            padding: 0 40px;
+            opacity: .85;
+            transition: opacity .25s;
+            cursor: pointer;
+            background-color: $dark-grey;
+
+            &:hover,
+            &:focus {
+                opacity: 1;
+            }
+        }
+    }
+
+    .classes {
+        position: fixed;
+        top: $spacer * 4.5;
+        right: 0;
+        width: calc(100vw - #{$navigation-width});
+        height: calc(100vh - #{$status-bar-button-height} - #{$spacer} * 4.5);
+        overflow: auto;
+        padding: $spacer;
+    }
 }
