@@ -3,9 +3,9 @@
 .status-bar {
     position: fixed;
     width: calc(100vw - #{$navigation-width});
-    background-color: $light-grey;
     bottom: 0;
     right: 0;
+    box-shadow: 0px -2px 10px $dark-grey;
 
     .module-count {
         padding: 0 $spacer;
@@ -16,24 +16,31 @@
     }
 
     .button {
-        color: white;
         height: $status-bar-button-height;
         padding: 0 40px;
-        opacity: .85;
-        transition: opacity .25s;
+        transition: background-color .25s;
         cursor: pointer;
 
-        &:hover,
-        &:focus {
-            opacity: 1;
+        span {
+            color: $white;
         }
     }
 
     .download-css {
         background-color: $green;
+
+        &:focus,
+        &:hover {
+            background-color: darken($green, 10);
+        }
     }
 
     .reset-modules {
         background-color: $red;
+
+        &:focus,
+        &:hover {
+            background-color: darken($red, 10);
+        }
     }
 }

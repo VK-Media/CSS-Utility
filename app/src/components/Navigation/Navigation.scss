@@ -2,8 +2,13 @@
 
 .navigation {
     position: fixed;
-    display: flex;
     width: $navigation-width;
+    flex-direction: column;
     height: 100vh;
-    background-color: $dark-grey;
+    overflow: auto;
+    border-right: 1px solid $light-grey;
+
+    a {
+        text-decoration: none;
+    }
 }

@@ -40,7 +40,7 @@ const StatusBar: React.FC<Props> = props => {
                 ><span>Reset</span></div>
 
                 <div
-                    className="button  d-f jc-c ai-c download-css"
+                    className="button d-f jc-c ai-c download-css"
                     onClick={() => props.requestCss()}
                 ><span>Download CSS</span></div>
             </div>
