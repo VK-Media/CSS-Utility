@@ -9,7 +9,7 @@
     }
 
     .item {
-        border: 1px solid $green;
+        border: 1px solid $blue;
         padding: $spacer;
 
         &.height-1 {
@@ -24,8 +24,31 @@
             height: 100px;
         }
 
+        &.width-half {
+            width: calc((100% - #{$spacer}) / 2);
+        }
+
         &:not(:last-of-type){
             margin-right: $spacer * .5;
+        }
+    }
+
+    &.fw-w {
+        .item {
+            &:not(:last-child){
+                margin-bottom: $spacer * .5;
+            }
+        }
+    }
+
+    &.fw-wr {
+        .item {
+            margin-bottom: $spacer * .5;
+            
+            &:nth-child(1),
+            &:nth-child(2){
+                margin-bottom: 0;
+            }
         }
     }
 }

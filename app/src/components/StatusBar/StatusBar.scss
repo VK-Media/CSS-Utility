@@ -5,10 +5,12 @@
     width: calc(100vw - #{$navigation-width});
     bottom: 0;
     right: 0;
-    box-shadow: 0px -2px 10px $dark-grey;
+    background-color: $white;
 
     .module-count {
         padding: 0 $spacer;
+        flex: 1;
+        border-top: 1px solid $light-grey;
 
         span {
             font-weight: 700;

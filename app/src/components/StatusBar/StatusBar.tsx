@@ -23,14 +23,14 @@ const StatusBar: React.FC<Props> = props => {
         });
 
         if (count) {
-            return <div className="module-count">{message}<span>{count}</span></div>
+            return <div className="module-count d-f ai-c"><div>{message}<span>{count}</span></div></div>
         }
 
-        return <div></div>;
+        return <div className="module-count d-f ai-c"></div>;
     }
 
     return (
-        <div className="status-bar d-f jc-sb ai-c">
+        <div className="status-bar d-f jc-sb ai-s">
             {renderModuleCount()}
 
             <div className="d-f jc-fe">
