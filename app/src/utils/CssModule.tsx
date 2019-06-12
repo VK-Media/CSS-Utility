@@ -23,10 +23,18 @@ const CssModule: React.FC<Props> = props => {
         return <div onClick={() => props.addModule({ name: props.cssKey })} className={className.join(' ')}>Include</div>
     }
 
+    const renderSelector = () => {
+        if(props.selector){
+            return <span>({props.selector})</span>;
+        }
+
+        return null;
+    }
+
     return (
         <div className="module">
             <div className="heading d-f jc-sb">
-                <h1>{props.title} <span>({props.selector})</span></h1>
+                <h1>{props.title} {renderSelector()}</h1>
                 {renderIncludeButton()}
             </div>
 
