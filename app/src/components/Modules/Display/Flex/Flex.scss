@@ -33,6 +33,18 @@
         }
     }
 
+    &.ai-b {
+        .item {
+            &:first-of-type{
+                font-size: 26px;
+            }
+
+            &:last-of-type{
+                font-size: 32px;
+            }
+        }
+    }
+
     &.fw-w {
         .item {
             &:not(:last-child){

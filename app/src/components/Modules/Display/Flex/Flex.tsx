@@ -1,130 +1,33 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { addModule } from '../../../../store/actions';
-import { Module, AddModule, ApplicationState } from '../../../../store/types';
+import CssModule from '../../../../utils/CssModule';
+import CssClass from '../../../../utils/CssClass';
 
 import './Flex.scss';
 
-type Props = {
-    selectedModules: Array<string>;
-    addModule: (module: Module) => AddModule;
-}
-
-const Flex: React.FC<Props> = props => {
-    const renderDummyBoxes = (count: number, classes?: Array<string>) => {
-        let dummyBoxes: Array<JSX.Element> = [];
-        let itemClasses: Array<string>;
-
-        if(classes){
-            itemClasses = ['item', ...classes];
-        } else {
-            itemClasses = ['item'];
-        }
-
-        for (let index = 1; index < count + 1; index++) {
-            dummyBoxes.push(<div className={ itemClasses.join(' ') }>Box { index }</div>);
-        }
-
-        return dummyBoxes;
-    }
-
-    const renderIncludeButton = () => {
-        let className: Array<string> = ['include-button', 'd-f', 'jc-sb', 'ai-c'];
-
-        if(props.selectedModules.indexOf('displayFlex') !== -1){
-            className.push('active');
-        }
-
-        return <div onClick={() => props.addModule({name: 'displayFlex'})} className={className.join(' ')}>Include</div>
-    }
-
+const Flex: React.FC = () => {
     return (
-        <div className="module">
-            <div className="heading d-f jc-sb">
-                <h1>Display/Flex <span>(.d-f)</span></h1>
-                { renderIncludeButton() }
-            </div>
+        <CssModule cssKey="displayFlex" title="Display/Flex" selector=".d-f">
+            <h2 className="mb-2">Justify Content</h2>
+            <CssClass title="Flex start" selector=".jc-fs" className="container mb-3 d-f jc-fs" dummies={3} />
+            <CssClass title="Flex end" selector=".jc-fe" className="container mb-3 d-f jc-fe" dummies={3} />
+            <CssClass title="Center" selector=".jc-c" className="container mb-3 d-f jc-c" dummies={3} />
+            <CssClass title="Space around" selector=".jc-sa" className="container mb-3 d-f jc-sa" dummies={3} />
+            <CssClass title="Space between" selector=".jc-sb" className="container mb-3 d-f jc-sb" dummies={3} />
 
-            <div className="classes">
-                <h2 className="mb-2">Justify Content</h2>
-                <h3 className="mb-1">Flex start <span>(.jc-fs)</span></h3>
-                <div className="container mb-3 d-f jc-fs">
-                    { renderDummyBoxes(3) }
-                </div>
+            <h2 className="mb-2">Align Items</h2>
+            <CssClass title="Strech" selector=".ai-s" className="container height-2 mb-3 d-f ai-s" dummies={3} />
+            <CssClass title="Center" selector=".ai-c" className="container height-2 mb-3 d-f ai-c" dummies={3} />
+            <CssClass title="Flex start" selector=".ai-fs" className="container height-2 mb-3 d-f ai-fs" dummies={3} />
+            <CssClass title="Flex end" selector=".ai-fe" className="container height-2 mb-3 d-f ai-fe" dummies={3} />
+            <CssClass title="Baseline" selector=".ai-b" className="container height-2 mb-3 d-f ai-b" dummies={3} />
 
-                <h3 className="mb-1">Flex end <span>(.jc-fe)</span></h3>
-                <div className="container mb-3 d-f jc-fe">
-                    {renderDummyBoxes(3)}
-                </div>
-
-                <h3 className="mb-1">Center <span>(.jc-c)</span></h3>
-                <div className="container mb-3 d-f jc-c">
-                    {renderDummyBoxes(3)}
-                </div>
-
-                <h3 className="mb-1">Space around <span>(.jc-sa)</span></h3>
-                <div className="container mb-3 d-f jc-sa">
-                    {renderDummyBoxes(3)}
-                </div>
-
-                <h3 className="mb-1">Space between <span>(.jc-sb)</span></h3>
-                <div className="container mb-3 d-f jc-sb">
-                    {renderDummyBoxes(3)}
-                </div>
-
-                <h2 className="mb-2">Align Items</h2>
-                <h3 className="mb-1">Stretch <span>(.ai-s)</span></h3>
-                <div className="container height-2 mb-3 d-f ai-s">
-                    {renderDummyBoxes(3)}
-                </div>
-
-                <h3 className="mb-1">Center <span>(.ai-c)</span></h3>
-                <div className="container height-2 mb-3 d-f ai-c">
-                    {renderDummyBoxes(3)}
-                </div>
-
-                <h3 className="mb-1">Flex start <span>(.ai-fs)</span></h3>
-                <div className="container height-2 mb-3 d-f ai-fs">
-                    {renderDummyBoxes(3)}
-                </div>
-
-                <h3 className="mb-1">Flex end <span>(.ai-fe)</span></h3>
-                <div className="container height-2 mb-3 d-f ai-fe">
-                    {renderDummyBoxes(3)}
-                </div>
-
-                <h3 className="mb-1">Baseline <span>(.ai-b)</span></h3>
-                <div className="container height-2 mb-3 d-f ai-b">
-                    <div className="item fs-1">Box 1</div>
-                    <div className="item fs-2">Box 2</div>
-                    <div className="item fs-3">Box 3</div>
-                </div>
-
-                <h2 className="mb-2">Flex wrap</h2>
-                <h3 className="mb-1">No wrap <span>(.fw-nw)</span></h3>
-                <div className="container mb-3 d-f fw-nw">
-                    {renderDummyBoxes(5, ['width-half'])}
-                </div>
-
-                <h3 className="mb-1">Wrap <span>(.fw-w)</span></h3>
-                <div className="container mb-3 d-f fw-w">
-                    {renderDummyBoxes(5, ['width-half'])}
-                </div>
-
-                <h3 className="mb-1">Wrap reverse <span>(.fw-wr)</span></h3>
-                <div className="container mb-3 d-f fw-wr">
-                    {renderDummyBoxes(5, ['width-half'])}
-                </div>
-            </div>
-        </div>
+            <h2 className="mb-2">Flex wrap</h2>
+            <CssClass title="No wrap" selector=".fw-nw" className="container mb-3 d-f fw-nw" dummies={5} dummyClasses={['width-half']} />
+            <CssClass title="Wrap" selector=".fw-w" className="container mb-3 d-f fw-w" dummies={5} dummyClasses={['width-half']} />
+            <CssClass title="Wrap reverse" selector=".fw-wr" className="container mb-3 d-f fw-wr" dummies={5} dummyClasses={['width-half']} />
+        </CssModule>
     );
 }
 
-const mapStateToProps = (state: ApplicationState) => {
-    return {
-        selectedModules: state.selectedModules
-    }
-}
-
-export default connect(mapStateToProps, { addModule })(Flex);
+export default Flex;
