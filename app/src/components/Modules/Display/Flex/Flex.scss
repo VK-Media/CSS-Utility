@@ -12,18 +12,6 @@
         border: 1px solid $blue;
         padding: $spacer;
 
-        &.height-1 {
-            height: 60px;
-        }
-
-        &.height-2 {
-            height: 80px;
-        }
-
-        &.height-3 {
-            height: 100px;
-        }
-
         &.width-half {
             width: calc((100% - #{$spacer}) / 2);
         }

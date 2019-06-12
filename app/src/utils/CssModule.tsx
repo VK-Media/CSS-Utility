@@ -9,7 +9,7 @@ interface Props {
     addModule: (module: Module) => AddModule;
     cssKey: string;
     title: string;
-    selector: string;
+    selector?: string;
 }
 
 const CssModule: React.FC<Props> = props => {
