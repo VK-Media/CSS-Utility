@@ -7,7 +7,7 @@ import './Flex.scss';
 
 const Flex: React.FC = () => {
     return (
-        <CssModule cssKey="displayFlex" title="Display/Flex" selector=".d-f">
+        <CssModule className="display-flex" cssKey="displayFlex" title="Display/Flex" selector=".d-f">
             <h2 className="mb-2">Justify Content</h2>
             <CssClass title="Flex start" selector=".jc-fs" className="container mb-3 d-f jc-fs" dummies={3} />
             <CssClass title="Flex end" selector=".jc-fe" className="container mb-3 d-f jc-fe" dummies={3} />

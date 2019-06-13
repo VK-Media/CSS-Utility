@@ -1,53 +1,49 @@
 @import '../../../../styles/variables';
 
-.container {
-    border: 1px solid $light-grey;
-    padding: $spacer * .5;
-
-    &.height-2 {
-        height: 200px;
-    }
-
-    .item {
-        border: 1px solid $blue;
-        padding: $spacer;
-
-        &.width-half {
-            width: calc((100% - #{$spacer}) / 2);
+.display-flex {
+    .container {
+        &.height-2 {
+            height: 200px;
         }
-
-        &:not(:last-of-type){
-            margin-right: $spacer * .5;
-        }
-    }
-
-    &.ai-b {
+        
         .item {
-            &:first-of-type{
-                font-size: 26px;
+            &.width-half {
+                width: calc((100% - #{$spacer}) / 2);
             }
-
-            &:last-of-type{
-                font-size: 32px;
-            }
-        }
-    }
-
-    &.fw-w {
-        .item {
-            &:not(:last-child){
-                margin-bottom: $spacer * .5;
-            }
-        }
-    }
-
-    &.fw-wr {
-        .item {
-            margin-bottom: $spacer * .5;
             
-            &:nth-child(1),
-            &:nth-child(2){
-                margin-bottom: 0;
+            &:not(:last-of-type){
+                margin-right: $spacer * .5;
+            }
+        }
+        
+        &.ai-b {
+            .item {
+                &:first-of-type{
+                    font-size: 26px;
+                }
+                
+                &:last-of-type{
+                    font-size: 32px;
+                }
+            }
+        }
+
+        &.fw-w {
+            .item {
+                &:not(:last-child){
+                    margin-bottom: $spacer * .5;
+                }
+            }
+        }
+
+        &.fw-wr {
+            .item {
+                margin-bottom: $spacer * .5;
+                
+                &:nth-child(1),
+                &:nth-child(2){
+                    margin-bottom: 0;
+                }
             }
         }
     }

@@ -54,6 +54,10 @@
                 color: $purple;
             }
         }
+
+        .purple {
+            color: $purple;
+        }
     }
 
     .classes {
@@ -63,6 +67,16 @@
         width: calc(100vw - #{$navigation-width});
         height: calc(100vh - #{$status-bar-button-height} - #{$spacer} * 3);
         overflow: auto;
+        padding: $spacer;
+    }
+}
+
+.container {
+    border: 1px solid $light-grey;
+    padding: $spacer * .5;
+
+    .item {
+        border: 1px solid $blue;
         padding: $spacer;
     }
 }

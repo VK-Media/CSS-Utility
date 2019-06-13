@@ -10,6 +10,7 @@ interface Props {
     cssKey: string;
     title: string;
     selector?: string;
+    className?: string;
 }
 
 const CssModule: React.FC<Props> = props => {
@@ -31,8 +32,18 @@ const CssModule: React.FC<Props> = props => {
         return null;
     }
 
+    const moduleClasses = () => {
+        let classes: string = 'module';
+
+        if(props.className){
+            classes += ` ${props.className}`;
+        }
+
+        return classes;
+    }
+
     return (
-        <div className="module">
+        <div className={moduleClasses()}>
             <div className="heading d-f jc-sb">
                 <h1>{props.title} {renderSelector()}</h1>
                 {renderIncludeButton()}
