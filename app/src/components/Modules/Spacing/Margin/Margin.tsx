@@ -19,7 +19,7 @@ const Margin: React.FC = () => {
 
         return (
             <>
-                <h2 className="mb-2">{heading}</h2>
+                <h3 className="mb-2">{heading}</h3>
                 <div className="container mb-3">
                     {margin}
                 </div>

@@ -32,3 +32,11 @@ h5 {
 h6 {
     font-size: 1.2rem;
 }
+
+a {
+    text-decoration: none;
+
+    &.vendor {
+        color: $dark-grey;
+    }
+}

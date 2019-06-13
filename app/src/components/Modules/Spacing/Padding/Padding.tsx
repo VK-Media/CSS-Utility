@@ -8,7 +8,7 @@ const Padding: React.FC = () => {
 
         for (let index = 1; index <= count; index++) {
             const paddingClass: string = classPrefix + index;
-            let className: Array<string> = [paddingClass, 'p-1', 'item'];
+            let className: Array<string> = [paddingClass, 'padding', 'item'];
 
             if (additionalClasses) {
                 className.push(...additionalClasses);
@@ -19,7 +19,7 @@ const Padding: React.FC = () => {
 
         return (
             <>
-                <h2 className="mb-2">{heading}</h2>
+                <h3 className="mb-2">{heading}</h3>
                 <div className="container mb-3">
                     {padding}
                 </div>
